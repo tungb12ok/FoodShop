@@ -1,0 +1,104 @@
+﻿@using FoodShop_SWP.Models.EF;
+@{
+    News blog = ViewData["blog"] as News;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Food Shop</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/WebLayout/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/WebLayout/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/WebLayout/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/WebLayout/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/WebLayout/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/WebLayout/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/WebLayout/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/WebLayout/css/style.css" type="text/css">
+</head>
+
+<body>
+    <!-- Blog Details Hero End -->
+    <!-- Blog Details Section Begin -->
+    <section class="blog-details spad">
+        <div class="container">
+            <div class="row justify-content-center" style="">
+                <div class="col-lg-8">
+                    <div class="blog__details__text">
+                        <img src="@blog.Image" style="width:100%" alt="">
+                        <h3>
+                            @blog.Title
+                        </h3>
+                        <p>
+                            @blog.Description
+                        </p>
+                        
+                        <p>
+                            @Html.Raw(ViewBag.Detail)
+                        </p>
+                    </div>
+                    <div class="blog__details__content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="blog__details__author">
+                                    <div class="blog__details__author__pic">
+                                        <img src="img/blog/details/details-author.jpg" alt="">
+                                    </div>
+                                    <div class="blog__details__author__text">
+                                        <h6>Michael Scofield</h6>
+                                        <span>Admin</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="blog__details__widget">
+                                    <ul>
+                                        <li><span>Categories:</span> Food</li>
+                                        <li><span>Tags:</span> All, Trending, Cooking, Healthy Food, Life Style</li>
+                                    </ul>
+                                    <div class="blog__details__social">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                                        <a href="#"><i class="fa fa-envelope"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Section End -->
+    <!-- Relate
+    <!-- Related Blog Section End -->
+    
+    <!-- Footer Section End -->
+    <!-- Js Plugins -->
+    <script src="~/WebLayout/js/jquery-3.3.1.min.js"></script>
+    <script src="~/WebLayout/js/bootstrap.min.js"></script>
+    <script src="~/WebLayout/js/jquery.nice-select.min.js"></script>
+    <script src="~/WebLayout/js/jquery-ui.min.js"></script>
+    <script src="~/WebLayout/js/jquery.slicknav.js"></script>
+    <script src="~/WebLayout/js/mixitup.min.js"></script>
+    <script src="~/WebLayout/js/owl.carousel.min.js"></script>
+    <script src="~/WebLayout/js/main.js"></script>
+
+
+
+</body>
+
+</html>

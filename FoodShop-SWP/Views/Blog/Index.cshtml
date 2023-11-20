@@ -1,0 +1,66 @@
+﻿@using FoodShop_SWP.Models.EF;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listBlog = ViewData["list"] as List<News>;
+    var page = ViewData["page"] as int?;
+}
+
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="WebLayout/img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Blog</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>Blog</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    <!-- Blog Section Begin -->
+    <section class="blog spad">
+        <div class="container">
+            <div class="row">
+                    <div class="row">
+                        @foreach (var item in listBlog)
+                        {
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="blog__item">
+                                    <div class="blog__item__pic">
+                                        <img src="@item.Image" width="70">
+                                    </div>
+                                    <div class="blog__item__text">
+                                        <ul>
+                                            <li><i class="fa fa-calendar-o"></i>@item.CreatedDate</li>
+                                            <li><i class="fa fa-comment-o"></i>5</li>
+                                        </ul>
+                                        <h5><a href="#">@item.Alias</a></h5>
+                                        <p>
+                                            @item.Description
+                                        </p>
+                                        <a asp-controller="Blog" asp-action="BlogDetail" asp-route-id="@item.Id" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="col-lg-12">
+                            <div class="product__pagination blog__pagination">
+                                @for (int i = 1; i < page; i++)
+                                {
+                                    <a asp-controller="Blog" asp-action="Blog" asp-route-num="@i">@i</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+   

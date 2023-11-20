@@ -1,0 +1,32 @@
+﻿@using FoodShop_SWP.Models.EF
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+
+        </thead>
+        <tbody>
+        @{
+            var i = 1;
+            @foreach (OrderDetail item in ViewBag.ProductTitle)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Product.Title</td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Price * item.Quantity)$</td>
+                </tr>
+                i++;
+            }
+        
+       
+        }
+        </tbody>
+    </table>

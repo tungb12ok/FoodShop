@@ -1,0 +1,14 @@
+﻿@model IEnumerable<FoodShop_SWP.Models.EF.ProductCategory>
+
+@if (Model != null && Model.Any())
+{
+    
+        @foreach (var item in Model)
+        {
+        <div class="col-lg-3">
+                <div class="categories__item" style="background-image: url('@item.Icon');">
+                <h5><a href="/Product/ProductList?search=&cid=@item.Id">@item.Title</a></h5>
+            </div>
+        </div>
+        }
+}

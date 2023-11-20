@@ -1,0 +1,303 @@
+﻿@using FoodShop_SWP.Models.EF
+@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .post-comments {
+            padding-bottom: 9px;
+            margin: 5px 0 5px;
+        }
+
+        .comments-nav {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 5px;
+        }
+
+        .post-comments .comment-meta {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 5px;
+        }
+
+        .post-comments .media {
+            border-left: 1px dotted #000;
+            border-bottom: 1px dotted #000;
+            margin-bottom: 5px;
+            padding-left: 10px;
+        }
+
+        .post-comments .media-heading {
+            font-size: 12px;
+            color: grey;
+        }
+
+        .post-comments .comment-meta a {
+            font-size: 12px;
+            color: grey;
+            font-weight: bolder;
+            margin-right: 5px;
+        }
+    </style>
+    <script type="text/javascript">
+        $('[data-toggle="collapse"]').on('click', function () {
+            var $this = $(this),
+                $parent = typeof $this.data('parent') !== 'undefined' ? $($this.data('parent')) : undefined;
+            if ($parent === undefined) { /* Just toggle my  */
+                $this.find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus');
+                return true;
+            }
+
+            /* Open element will be close if parent !== undefined */
+            var currentIcon = $this.find('.glyphicon');
+            currentIcon.toggleClass('glyphicon-plus glyphicon-minus');
+            $parent.find('.glyphicon').not(currentIcon).removeClass('glyphicon-minus').addClass('glyphicon-plus');
+
+        });
+    </script>
+</head>
+
+<body>
+
+    <!-- Humberger End -->
+    <!-- Header Section Begin -->
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Vegetable’s Package</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/Home/Index">Home</a>
+                            <a href="./index.html">Vegetables</a>
+                            <span>Vegetable’s Package</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    <!-- Product Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large"
+                                 src="@ViewBag.product.Image" alt="">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__text">
+                        <h3>@ViewBag.product.Title</h3>
+                        <div class="product__details__rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <span>(18 reviews)</span>
+                        </div>
+                        <div class="product__details__price">
+                            $@if (ViewBag.product.PriceSale > 0)
+                            {
+                            @ViewBag.product.PriceSale <del style="color: red">$@ViewBag.product.Price</del>
+                            }
+                            else
+                            {
+                            @ViewBag.product.Price
+                            }
+                        </div>
+                        <p><b>SKU: </b>@ViewBag.product.ProductCode</p>
+                        <form method="get" action="/Cart/Index">
+                            <div class="product__details__quantity">
+                                <div class="quantity">
+                                    <div class="pro-qty">
+                                        <input type="text" name="quantity" value="1">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <input id="productId" type="hidden" name="productId" value="@ViewBag.product.Id" />
+                            <input id="handler" type="hidden" name="handler" value="add" />
+                            <input id="url" type="hidden" name="url" value="ProductDetail" />
+                            <button type="submit" class="primary-btn">ADD TO CART</button>
+                        </form>
+
+                        <ul>
+                            <li><b>Availability</b> <span>@ViewBag.product.Quantity</span></li>
+
+                            <li>
+                                <b>Share on</b>
+                                <div class="share">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                   aria-selected="true">Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                                   aria-selected="false">Detail</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Products Description</h6>
+                                    <p>@ViewBag.product.Description</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Products Infomation</h6>
+                                    <p>@Html.Raw(ViewBag.ProductDetail)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="post-comments">
+                        @if (Context.Session.GetString("Email") != null)
+                        {
+                            <form asp-action="addComment" asp-controller="FeedBack" method="post">
+                                <input type="hidden" name="productID" value="@ViewBag.product.Id">
+                                <div class="form-group">
+                                    <label for="comment">Your Comment</label>
+                                    <textarea name="comment" class="form-control" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-default">Send</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <div>You need login to comment that product</div>
+                        }
+                        <div class="comments-nav">
+                            <ul class="nav nav-pills">
+                                <li role="presentation" class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                                       aria-expanded="false">
+                                        There are @(ViewBag.feedbacks.Count) comments
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="row">
+
+                            @foreach (Feedback feedback in ViewBag.feedbacks)
+                            {
+                                <div class="media">
+                                    <div class="media-heading">
+                                        <span class="label label-info">@(feedback.user.Email)</span>
+                                    </div>
+
+                                    <div class="media-body">
+                                        <p> @feedback.Content</p>
+                                    </div>
+                                    <!-- comments -->
+
+                                </div>
+                            }
+                            <!-- first comment -->
+                        </div>
+                    </div>
+                    <!-- post-comments -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Details Section End -->
+    <!-- Related Product Section Begin -->
+    <section class="related-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title related__product__title">
+                        <h2>Related Product</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (Product p in ViewBag.relatedProduct)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product__item">
+                            <div class="product__item__pic" style="background-image: url('@p.Image'); ">
+                                <ul class="product__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="product__item__text">
+                                <h6><a href="./ProductDetail?id=@p.Id">@p.Title</a></h6>
+                                <h5>$@p.PriceSale</h5>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- Related Product Section End -->
+    <!-- Footer Section Begin -->
+    <!-- Footer Section End -->
+    <!-- Js Plugins -->
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/mixitup.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+
+
+</body>
+
+</html>

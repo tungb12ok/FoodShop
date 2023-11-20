@@ -1,0 +1,226 @@
+﻿﻿@using FoodShop_SWP.Models.EF
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+    <section class="breadcrumb-section set-bg" data-setbg="https://scontent.fhan3-5.fna.fbcdn.net/v/t1.15752-9/310793219_543923377575354_2131878697939909705_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=YeW3uow0OCcAX9R3Bvg&_nc_ht=scontent.fhan3-5.fna&oh=03_AdQXZ1U7WsNF81vRfJMYHvPa0gZW842O9e_XpUJptZ1wWA&oe=655F0B54"
+             style="background-image: url(https://scontent.fhan3-5.fna.fbcdn.net/v/t1.15752-9/310793219_543923377575354_2131878697939909705_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=YeW3uow0OCcAX9R3Bvg&_nc_ht=scontent.fhan3-5.fna&oh=03_AdQXZ1U7WsNF81vRfJMYHvPa0gZW842O9e_XpUJptZ1wWA&oe=655F0B54);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Shop</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./home">Home</a>
+                            <span>Shop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5">
+                    <div class="sidebar">
+                        <div class="sidebar__item">
+                            <h4>Search by name</h4>
+                            <form method="get">
+                                <input type="text" value="@ViewBag.search" name="search" class="form-control" style="display: inline-block; width: 80%;" />
+                                <input type="hidden" value="@ViewBag.cid" name="cid" />
+                                <button type="submit" class="site-btn">Go</button>
+                            </form>
+                        </div>
+                        <div class="sidebar__item">
+                            <h4>Category</h4>
+
+                            <ul>
+                                <li><a href="./ProductList?search=@ViewBag.search&cid=">All</a></li>
+
+                                @foreach (ProductCategory cate in ViewBag.cates)
+                                {
+                                    <li><a href="./ProductList?search=@ViewBag.search&cid=@cate.Id" @(ViewBag.cid == cate.Id ? "style=font-weight:bold" : "")>@cate.Title</a></li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="sidebar__item">
+                            <div class="latest-product__text">
+                                <h4>Latest Products</h4>
+                                <div class="latest-product__slider owl-carousel">
+                                    <div class="latest-prdouct__slider__item">
+                                        @foreach (Product p in ViewBag.lastProduct)
+                                        {
+                                            <a href="#" class="latest-product__item">
+                                                <div class="latest-product__item__pic">
+                                                    <img src="@p.Image" alt="" />
+                                                </div>
+                                                <div class="latest-product__item__text">
+                                                    <h6><a href="./ProductDetail?id=@p.Id">@p.Title</a></h6>
+                                                    <span>
+                                                        @if (p.PriceSale > 0)
+                                                        {
+                                                            <h5>$@p.PriceSale  <del style="color: red">$@p.Price</del></h5>
+                                                        }
+                                                        else
+                                                        {
+                                                            <h5>$@p.Price</h5>
+                                                        }
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-7">
+                    <div class="product__discount">
+                        <div class="section-title product__discount__title">
+                            <h2>Sale Off</h2>
+                        </div>
+                        <div class="row">
+                            <div class="product__discount__slider owl-carousel">
+                                @foreach (Product p in ViewBag.salePro)
+                                {
+                                    <div class="col-lg-4">
+                                        <div class="product__discount__item">
+                                            <div class="product__discount__item__pic "
+                                                 style="background-image: url('@p.Image'); ">
+                                                <ul class="product__item__pic__hover">
+                                                    <li><a asp-action="addtofavourite" asp-controller="Home" asp-route-id="@p.Id"><i class="fa fa-heart"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                    <li><a href="/Cart/Index?productId=@p.Id&handler=add&quantity=1&url=ProductList"><i class="fa fa-shopping-cart"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="product__discount__item__text">
+                                                <span>@p.ProductCategory.Title</span>
+                                                <h5><a href="./ProductDetail?id=@p.Id">@p.Title</a></h5>
+                                                <div class="product__item__price">
+                                                    @if (p.PriceSale > 0)
+                                                    {
+                                                        <h5>$@p.PriceSale  <del style="color: red">$@p.Price</del></h5>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h5>$@p.Price</h5>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter__item">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-5">
+                                <div class="filter__sort">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="filter__found">
+                                    List All Product
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-3">
+                                <div class="filter__option">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (Product p in ViewBag.pl)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic " style="background-image: url('@p.Image'); ">
+                                        <ul class="product__item__pic__hover">
+                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                            <li><a href="/Cart/Index?productId=@p.Id&handler=add&quantity=1&url=ProductList"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <span>@p.ProductCategory.Title</span>
+                                        <h6><a href="./ProductDetail?id=@p.Id">@p.Title</a></h6>
+                                        <h5>
+                                            @if (p.PriceSale > 0)
+                                            {
+                                                <h5>$@p.PriceSale<del style="color: red">$@p.Price</del></h5>
+                                            }
+                                            else
+                                            {
+                                                <h5>$@p.Price</h5>
+                                            }
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="product__pagination">
+                        @for (int i = 1; i <= ViewBag.totalPage; i++)
+                        {
+                            <a href="./ProductList?search=@ViewBag.search&cid=@ViewBag.cid&index=@i">@i</a>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Kiểm tra trạng thái thông báo
+        var checkoutStatus = localStorage.getItem("checkoutStatus");
+        if (checkoutStatus === "success") {
+            alert("Checkout successfully");
+            // Xóa trạng thái để tránh hiển thị lại thông báo khi tải lại trang
+            localStorage.removeItem("checkoutStatus");
+        }
+    </script>
+    <!-- Product Section End -->
+    <!-- Footer Section Begin -->
+    <!-- Footer Section End -->
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+
+
+</body>
+
+</html>
